@@ -34,8 +34,10 @@ func main() {
 	defer conn.Close()
 	client := pb.NewUserManagementClient(conn)
 
-	CreateNewUserUnary(client, &pb.NewUser{
-		Name: "dulguun",
-		Age:  22,
-	})
+	for i := 0; i < 6; i++ {
+		CreateNewUserUnary(client, &pb.NewUser{
+			Name: "dulguun",
+			Age:  22,
+		})
+	}
 }
