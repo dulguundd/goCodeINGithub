@@ -1,15 +1,13 @@
-package main
+package ver
 
 import (
+	"encoding/json"
 	"fmt"
-	jsoniter "github.com/json-iterator/go"
 	"os"
 	"time"
 )
 
-var jsonjoniter = jsoniter.ConfigCompatibleWithStandardLibrary
-
-func funcjsoniter() {
+func funcjson() {
 	start := time.Now()
 	rawData := []byte(`
     {
@@ -107,11 +105,11 @@ func funcjsoniter() {
 }`)
 	var data Data
 	for i := 0; i < 1000; i++ {
-		if err := jsonjoniter.Unmarshal(rawData, &data); err != nil {
+		if err := json.Unmarshal(rawData, &data); err != nil {
 			fmt.Print(err)
 			os.Exit(1)
 		}
 	}
-	serviceLatencyLogger(start)
+	ServiceLatencyLogger(start)
 	//fmt.Println(data)
 }

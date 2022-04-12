@@ -1,4 +1,4 @@
-package main
+package ver
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func serviceLatencyLogger(start time.Time) {
+func ServiceLatencyLogger(start time.Time) {
 	elapsed := time.Since(start)
 	logMessage := fmt.Sprintf("response latencie %s", elapsed)
 	log.Println(logMessage)

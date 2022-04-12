@@ -1,4 +1,4 @@
-package main
+package ver
 
 import (
 	"fmt"
@@ -110,6 +110,6 @@ func funcgojson() {
 			os.Exit(1)
 		}
 	}
-	serviceLatencyLogger(start)
+	ServiceLatencyLogger(start)
 	//fmt.Println(data)
 }
