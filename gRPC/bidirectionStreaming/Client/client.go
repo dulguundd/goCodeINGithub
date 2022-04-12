@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	pb "goCodeINGithub/gRPC/bidirectionStreaming/API"
 	"google.golang.org/grpc"
 	"io"
@@ -9,7 +10,8 @@ import (
 	"time"
 )
 
-const address = "192.168.1.102:50051"
+//const address = "192.168.1.102:50051"
+const address = "localhost:50051"
 
 func CreateNewUser(client pb.UserManagementClient) {
 	NewUsers := []*pb.NewUser{
@@ -51,6 +53,7 @@ func CreateNewUser(client pb.UserManagementClient) {
 }
 
 func main() {
+	start := time.Now()
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
@@ -59,4 +62,11 @@ func main() {
 	client := pb.NewUserManagementClient(conn)
 
 	CreateNewUser(client)
+	serviceLatencyLogger(start)
+}
+
+func serviceLatencyLogger(start time.Time) {
+	elapsed := time.Since(start)
+	logMessage := fmt.Sprintf("response latencie %s", elapsed)
+	log.Println(logMessage)
 }
