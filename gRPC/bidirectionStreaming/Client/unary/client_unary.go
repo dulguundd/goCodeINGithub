@@ -38,19 +38,8 @@ func main() {
 	defer conn.Close()
 	client := pb.NewUserManagementClient(conn)
 
-	runningcount := 0
-	for runningcount < count {
-		CreateNewUserUnary(client, &pb.NewUser{
-			Name: "dulguun",
-			Age:  22,
-		})
-		runningcount++
-	}
-	serviceLatencyLogger(start)
-}
-
-func serviceLatencyLogger(start time.Time) {
-	elapsed := time.Since(start)
-	logMessage := fmt.Sprintf("response latencie %s", elapsed)
-	log.Println(logMessage)
+	CreateNewUserUnary(client, &pb.NewUser{
+		Name: "dulguun",
+		Age:  22,
+	})
 }
