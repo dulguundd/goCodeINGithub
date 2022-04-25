@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/xml"
+	"fmt"
 	"github.com/gorilla/mux"
 	"log"
 	"net/http"
@@ -14,7 +15,7 @@ func main() {
 }
 
 func Zatoresponse(w http.ResponseWriter, r *http.Request) {
-	var response = []byte(`
+	var raw = []byte(`
 <repomd xmlns="http://linux.duke.edu/metadata/repo" xmlns:rpm="http://linux.duke.edu/metadata/rpm">
 <revision>1611239850</revision>
 <data type="filelists">
@@ -69,6 +70,12 @@ func Zatoresponse(w http.ResponseWriter, r *http.Request) {
 <open-size>1204224</open-size>
 </data>
 </repomd>`)
+	var response Response
+	err := xml.Unmarshal(raw, &response)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(response)
 	w.Header().Add("Content-Type", "application/xml")
 	w.WriteHeader(200)
 	if err := xml.NewEncoder(w).Encode(response); err != nil {
