@@ -9,8 +9,8 @@ import (
 )
 
 func Start() {
-	router := mux.NewRouter()
 
+	router := mux.NewRouter()
 	ch := ConvertHandler{service.NewConvertService(domain.NewConvertRepository)}
 
 	router.HandleFunc("/xmltojson", ch.XMLToJson).Methods(http.MethodGet)
