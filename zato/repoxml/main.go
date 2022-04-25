@@ -75,3 +75,40 @@ func Zatoresponse(w http.ResponseWriter, r *http.Request) {
 		panic(err)
 	}
 }
+
+type Response struct {
+	Repomd Repomd `json:"repomd"`
+}
+
+type Repomd struct {
+	Revision string  `json:"revision"`
+	Data     []Datum `json:"data"`
+	Xmlns    string  `json:"_xmlns"`
+	XmlnsRPM string  `json:"_xmlns:rpm"`
+}
+
+type Datum struct {
+	Checksum        Checksum `json:"checksum"`
+	OpenChecksum    Checksum `json:"open-checksum"`
+	Location        Location `json:"location"`
+	Timestamp       string   `json:"timestamp"`
+	Size            string   `json:"size"`
+	OpenSize        string   `json:"open-size"`
+	Type            string   `json:"_type"`
+	DatabaseVersion *string  `json:"database_version,omitempty"`
+}
+
+type Checksum struct {
+	Type Type   `json:"_type"`
+	Text string `json:"__text"`
+}
+
+type Location struct {
+	Href string `json:"_href"`
+}
+
+type Type string
+
+const (
+	Sha256 Type = "sha256"
+)
