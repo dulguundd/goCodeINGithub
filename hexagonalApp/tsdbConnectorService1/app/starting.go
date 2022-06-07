@@ -50,7 +50,7 @@ func SanityCheckDb() *DbConnectionConfig {
 		dbConnectionConfig.DbPassword = os.Getenv("DB_PASSWORD")
 	}
 	if os.Getenv("DB_ADDR") == "" {
-		dbConnectionConfig.DbAddr = "0.0.0.0"
+		dbConnectionConfig.DbAddr = "172.22.2.215"
 	} else {
 		dbConnectionConfig.DbAddr = os.Getenv("DB_ADDR")
 	}

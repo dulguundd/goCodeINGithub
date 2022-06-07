@@ -7,7 +7,7 @@ import (
 )
 
 type Data struct {
-	Time      time.Time `json:"time"`
+	Bucket    time.Time `json:"bucket"`
 	Temp      float64   `json:"temp"`
 	Device_id int       `json:"device_id"`
 }
@@ -22,7 +22,7 @@ type DataRepository interface {
 
 func (d Data) ToDtoData() dto.DataResponse {
 	return dto.DataResponse{
-		Time:      d.Time,
+		Time:      d.Bucket,
 		Temp:      d.Temp,
 		Device_Id: d.Device_id,
 	}
@@ -30,7 +30,7 @@ func (d Data) ToDtoData() dto.DataResponse {
 
 func ReqToNewData(Temp float64, Device_Id int) Data {
 	return Data{
-		Time:      time.Now(),
+		Bucket:    time.Now(),
 		Temp:      Temp,
 		Device_id: Device_Id,
 	}
@@ -38,7 +38,7 @@ func ReqToNewData(Temp float64, Device_Id int) Data {
 
 func (d Data) PostedDataToDtoData() *dto.DataResponse {
 	return &dto.DataResponse{
-		Time:      d.Time,
+		Time:      d.Bucket,
 		Temp:      d.Temp,
 		Device_Id: d.Device_id,
 	}

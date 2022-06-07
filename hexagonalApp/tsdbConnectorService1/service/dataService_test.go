@@ -51,7 +51,7 @@ func Test_should_return_an_error_from_the_server_side_if_the_new_account_cannot_
 		Device_Id: 3,
 	}
 	newData := realdata.Data{
-		Time:      time.Now(),
+		Bucket:    time.Now(),
 		Temp:      req.Temp,
 		Device_id: req.Device_Id,
 	}
@@ -76,7 +76,7 @@ func Test_should_return_new_data_response_when_a_new_data_is_saved_successfully_
 		Device_Id: 3,
 	}
 	newData := realdata.Data{
-		Time:      time.Now(),
+		Bucket:    time.Now(),
 		Temp:      req.Temp,
 		Device_id: req.Device_Id,
 	}

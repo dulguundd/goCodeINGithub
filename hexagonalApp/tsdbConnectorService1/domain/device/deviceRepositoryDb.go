@@ -16,7 +16,7 @@ func (d RepositoryDb) GetAllDevice() ([]Device, *errs.AppError) {
 	var devices []Device
 	var err error
 
-	queryCommand := "SELECT * FROM device ORDER BY device_id DESC"
+	queryCommand := "SELECT * FROM iot_info ORDER BY device_id DESC"
 	err = d.pool.Select(&devices, queryCommand)
 
 	if err != nil {
@@ -31,7 +31,7 @@ func (d RepositoryDb) GetDevice(id int) (*Device, *errs.AppError) {
 	var r Device
 	var err error
 
-	queryCommand := "SELECT * FROM device where device_id = $1"
+	queryCommand := "SELECT * FROM iot_info where device_id = $1"
 	err = d.pool.Get(&r, queryCommand, id)
 
 	if err != nil {

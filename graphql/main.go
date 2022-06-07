@@ -28,15 +28,31 @@ func populate() []Tutorial {
 		Name:      "Dulguun",
 		Tutorials: []int{1},
 	}
+
 	tutorial := Tutorial{
 		Id:     1,
 		Title:  "Go GraphQL Tutorial",
 		Author: *author,
 		Commnets: []Comment{
-			Comment{"First Comment"},
+			{"First Comment"},
 		},
 	}
 	var tutorials []Tutorial
+	tutorials = append(tutorials, tutorial)
+
+	author = &Author{
+		Name:      "Dulguun2",
+		Tutorials: []int{1},
+	}
+	tutorial = Tutorial{
+		Id:     2,
+		Title:  "Go GraphQL Tutorial2",
+		Author: *author,
+		Commnets: []Comment{
+			Comment{"Second Comment"},
+		},
+	}
+
 	tutorials = append(tutorials, tutorial)
 
 	return tutorials
@@ -134,6 +150,18 @@ func main() {
 		{
 			Tutorial(id:1) {
 				title
+				author {
+					Name
+					Tutorials
+				}
+			}
+		}
+	`
+	query = `
+		{
+			list {
+				title
+				id
 				author {
 					Name
 					Tutorials

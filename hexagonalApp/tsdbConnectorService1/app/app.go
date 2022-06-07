@@ -19,12 +19,12 @@ func Start() {
 	router := mux.NewRouter()
 
 	// wiring
-	dbClient := getDbClient()
-	dataRepositoryDb := data.NewRepositoryDb(dbClient)
-	deviceRepositoryDb := device.NewRepositoryDb(dbClient)
+	//dbClient := getDbClient()
+	//dataRepositoryDb := data.NewRepositoryDb(dbClient)
+	//deviceRepositoryDb := device.NewRepositoryDb(dbClient)
 
-	deh := DeviceHandlers{service.NewDeviceService(deviceRepositoryDb)}
-	dah := DataHandlers{service.NewDataService(dataRepositoryDb)}
+	deh := DeviceHandlers{service.NewDeviceService(device.NewRepositoryDb(getDbClient()))}
+	dah := DataHandlers{service.NewDataService(data.NewRepositoryDb(getDbClient()))}
 
 	//define device routes
 	router.HandleFunc("/device", deh.getAllDevice).Methods(http.MethodGet)

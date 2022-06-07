@@ -21,7 +21,7 @@ func Test_should(t *testing.T) {
 	mock.ExpectCommit()
 
 	newData := Data{
-		Time:      time.Now(),
+		Bucket:    time.Now(),
 		Temp:      10,
 		Device_id: 1,
 	}

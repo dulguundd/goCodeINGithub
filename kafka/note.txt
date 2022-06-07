@@ -1,0 +1,5 @@
+see topic
+docker exec -ti 9bcc96a5fee6 /opt/bitnami/kafka/bin/kafka-topics.sh --describe --bootstrap-server localhost:9092 --topic comments
+
+create topic
+docker exec -ti kafka-kafka-1 /opt/bitnami/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic go-comments --create --partitions 3 --replication-factor 1
