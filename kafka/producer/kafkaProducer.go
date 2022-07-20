@@ -19,7 +19,7 @@ func ConnectProducer(brokersUrl []string) (sarama.SyncProducer, error) {
 }
 
 func PushCommentToQueue(topic string, message []byte) error {
-	brokersUrl := []string{"172.22.2.215:9093"}
+	brokersUrl := []string{"172.30.52.239:29092"}
 	producer, err := ConnectProducer(brokersUrl)
 	if err != nil {
 		return err

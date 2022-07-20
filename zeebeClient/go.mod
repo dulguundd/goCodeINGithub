@@ -1,10 +1,11 @@
-module goCodeINGithub/zeebe-client
+module zeebeClient
 
 go 1.17
 
+require github.com/camunda/zeebe/clients/go/v8 v8.0.3
+
 require (
 	github.com/asaskevich/govalidator v0.0.0-20200108200545-475eaeb16496 // indirect
-	github.com/camunda/zeebe/clients/go/v8 v8.0.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/go-ozzo/ozzo-validation/v4 v4.3.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect

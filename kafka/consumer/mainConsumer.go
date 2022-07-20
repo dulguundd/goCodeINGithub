@@ -10,7 +10,7 @@ import (
 
 func main() {
 	topic := "go-comments"
-	brokersUrl := []string{"172.22.2.215:9093"}
+	brokersUrl := []string{"172.30.52.239:29092"}
 	worker, err := connectConsumer(brokersUrl)
 	if err != nil {
 		panic(err)

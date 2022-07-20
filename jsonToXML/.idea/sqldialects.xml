@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/postgres/address.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/create.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_ADDRESS.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_COLORS.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_CUSTOMERS.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_LABELS.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_ORDERS.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_PRODUCTS.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_SIZES.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_STOCK.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/postgres/src/CREATE_TABLES.sql" dialect="PostgreSQL" />
+  </component>
+</project>

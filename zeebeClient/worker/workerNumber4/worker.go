@@ -2,14 +2,15 @@ package main
 
 import (
 	"context"
-	"github.com/camunda/zeebe/clients/go/pkg/entities"
-	"github.com/camunda/zeebe/clients/go/pkg/worker"
-	"github.com/camunda/zeebe/clients/go/pkg/zbc"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/entities"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/worker"
+	"github.com/camunda/zeebe/clients/go/v8/pkg/zbc"
 	"log"
 	"os"
+	"time"
 )
 
-const ZeebeAddr = "172.32.52.239:26500"
+const ZeebeAddr = "172.30.52.239:26500"
 
 var readyClose = make(chan struct{})
 
@@ -31,22 +32,19 @@ func main() {
 		panic(err)
 	}
 
-	jobWorker := zbClient.NewJobWorker().JobType("payment-service").Handler(handleJob).Open()
+	jobWorker := zbClient.NewJobWorker().JobType("Delivered-test").Handler(handleJob).
+		//Name("Worker1").
+		MaxJobsActive(1).
+		PollInterval(time.Second * 3).
+		PollThreshold(5).
+		Open()
 
 	<-readyClose
 	jobWorker.Close()
-	jobWorker.AwaitClose()
 }
 
 func handleJob(client worker.JobClient, job entities.Job) {
 	jobKey := job.GetKey()
-
-	headers, err := job.GetCustomHeadersAsMap()
-	if err != nil {
-		// failed to handle job as we require the custom job headers
-		failJob(client, job)
-		return
-	}
 
 	variables, err := job.GetVariablesAsMap()
 	if err != nil {
@@ -55,7 +53,6 @@ func handleJob(client worker.JobClient, job entities.Job) {
 		return
 	}
 
-	variables["totalPrice"] = 46.50
 	request, err := client.NewCompleteJobCommand().JobKey(jobKey).VariablesFromMap(variables)
 	if err != nil {
 		// failed to set the updated variables
@@ -64,8 +61,7 @@ func handleJob(client worker.JobClient, job entities.Job) {
 	}
 
 	log.Println("Complete job", jobKey, "of type", job.Type)
-	log.Println("Processing order:", variables["orderId"])
-	log.Println("Collect money using payment method:", headers["method"])
+	log.Println("Variable check:", variables["unsaved"])
 
 	ctx := context.Background()
 	_, err = request.Send(ctx)
@@ -74,7 +70,6 @@ func handleJob(client worker.JobClient, job entities.Job) {
 	}
 
 	log.Println("Successfully completed job")
-	close(readyClose)
 }
 
 func failJob(client worker.JobClient, job entities.Job) {
